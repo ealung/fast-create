@@ -16,7 +16,6 @@ import java.util.Map;
  * email hzzhangchanglu@corp.netease.com
  */
 public class CreateTemplate {
-    private Logger logger = Logger.getLogger(CreateTemplate.class);
 
     /**
      * 根据模板创建
@@ -31,12 +30,8 @@ public class CreateTemplate {
                 if (file1.isDirectory()) {
                     continue;
                 }
-                logger.info("根据模板 [" + file1.getName() + "]进行创建");
                 createJava(root, file, file1.getName());
             }
-//            logger.info("创建转换类");
-//            createConvert(root,file);
-//            logger.info("创建转换类完成");
         }
 
     }
@@ -70,10 +65,7 @@ public class CreateTemplate {
                 root.put("className", createName);
             }
             daoImplTemplate.process(root, new OutputStreamWriter(new FileOutputStream(new File(path)), "UTF-8"));
-        } else {
-            logger.info("templatePath 路径不存在 不进行创建");
         }
-
     }
 
     /**
@@ -85,36 +77,6 @@ public class CreateTemplate {
      */
     private void createJava(Map<String, Object> root, File file, String templateName) throws Exception {
         createForTemplate(root, file, templateName);
-        logger.info("根据模板创建完成");
     }
 
-  /*  *//**
-     * 创建convert
-     *
-     * @param root
-     *//*
-    private void createConvert(Map<String, Object> root,File baseFile) throws Exception {
-        String templatePath = baseFile.getPath()+File.separator+"convert";
-        File file = new File(templatePath);
-        String modelName = root.get("modelName").toString();
-        //service
-        String source = modelName;
-        String target = modelName + "DTO";
-        root.put("V", target);
-        root.put("T", source);
-        createForTemplate(root, file, "Convert.java", modelName + "ServiceConvertUtils");
-
-        //manager
-        source = modelName + "BO";
-        target = modelName + "DTO";
-        root.put("V", target);
-        root.put("T", source);
-        createForTemplate(root, file, "Convert.java", modelName + "ManagerConvertUtils");
-        //controller
-        source = modelName + "VO";
-        target = modelName + "BO";
-        root.put("V", target);
-        root.put("T", source);
-        createForTemplate(root, file, "Convert.java", modelName + "ControllerConvertUtils");
-    }*/
 }

@@ -35,33 +35,32 @@ import java.util.Map;
  */
 public class FastCreate extends AnAction {
     private CreateTemplate createJava = new CreateTemplate();
-    private Logger logger = Logger.getLogger(FastCreate.class);
 
     @Override
     public void actionPerformed(AnActionEvent anActionEvent) {
-        logger.info("\r\n\r\n--------------------------------start create-------------------------------");
         Project project = anActionEvent.getProject();
-        if (null == Logger.file) {
-            Logger.file = new File(project.getBasePath());
-        }
-        Map<String, Object> root = new HashMap<>();
+        PsiClass psiClass = getPsiMethodFromContext(anActionEvent);
+        FastParam fastParam = addFastParam(anActionEvent);
+        createForTemplate(project, psiClass, fastParam);
+    }
+
+    private FastParam addFastParam(AnActionEvent anActionEvent) {
+        FastParam fastParam = new FastParam();
         PsiClass psiClass = getPsiMethodFromContext(anActionEvent);
         String qualifiedName = psiClass.getQualifiedName();
         String packagePath = qualifiedName.substring(0, qualifiedName.indexOf("." + psiClass.getName()));
-        root.put("package", packagePath);
-        root.put("user", System.getProperty("user.name"));
-        root.put("modelName", psiClass.getName());
-        root.put("fileds", getAttribute(psiClass));
+        fastParam.put("package", packagePath);
+        fastParam.put("user", System.getProperty("user.name"));
+        fastParam.put("modelName", psiClass.getName());
+        fastParam.put("fileds", getAttribute(psiClass));
         VirtualFile data = anActionEvent.getData(PlatformDataKeys.VIRTUAL_FILE);
         String path = data.getPath();
-        logger.info("来源类路径:" + data.getPath());
         path = path.substring(0, path.indexOf(psiClass.getName()) - 1);
-        root.put("path", path);
-        createForTemplate(project, psiClass, root);
-        logger.info("\r\n--------------------------------start end-------------------------------");
+        fastParam.put("path", path);
+        return fastParam;
     }
 
-    private void createForTemplate(Project project, PsiClass psiClass, Map<String, Object> root) {
+    private void createForTemplate(Project project, PsiClass psiClass, FastParam fastParam) {
         //设置模板路径
         //String templatePath = project.getBasePath() + File.separator + "fast-template";
         File file;
@@ -75,18 +74,13 @@ public class FastCreate extends AnAction {
             Messages.showMessageDialog("请在项目下增加fast-template目录进行自定义配置", "非法的创建", Messages.getWarningIcon());
             isok = false;
         }
-        if (isok && !checkSource(psiClass)) {
-            isok = false;
-            Messages.showMessageDialog("默认只支持通过ddb Meta进行生成\r\n如果需要自定义请在项目resouces 下增加fast-template目录进行自定义配置", "非法的创建", Messages.getWarningIcon());
-        }
         try {
             if (isok) {
-                createJava.create(project, root, file);
+                createJava.create(project, fastParam, file);
                 Messages.showMessageDialog("创建完成", "创建完成", Messages.getInformationIcon());
             }
         } catch (Exception e) {
             Messages.showMessageDialog(getMessageError(e), "创建失败，请联系作者。", Messages.getErrorIcon());
-            logger.info("创建失败", e);
         }
     }
 
@@ -135,10 +129,6 @@ public class FastCreate extends AnAction {
         char[] cs = name.toCharArray();
         cs[0] -= 32;
         return String.valueOf(cs);
-    }
-
-    private boolean checkSource(PsiClass psiClass) {
-        return psiClass.getText().contains("@AnnonOfClass");
     }
 
     /**
