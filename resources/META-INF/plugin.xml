@@ -1,0 +1,43 @@
+<idea-plugin>
+    <id>com.netease.steam.fastcreate</id>
+    <name>fast create</name>
+    <version>1.0</version>
+    <vendor email="hzzhangchanglu@corp.netease.com" url="http://www.163.com">netease</vendor>
+
+    <description><![CDATA[
+     已经支持内置模板变量 \r\n
+     package    当前包路径\r\n
+     user       当前系统登录用户名称\r\n
+     modelName  当前类名称\r\n
+     fileds     当前类字段集合\r\n
+     path       来源类路径\r\n
+     生成类名称为 ${modelName}模板名称\r\n
+    ]]></description>
+
+    <change-notes><![CDATA[
+        first create
+    ]]>
+    </change-notes>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+    <idea-version since-build="145.0"/>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <!-- uncomment to enable plugin in all products
+    <depends>com.intellij.modules.lang</depends>
+    -->
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+        <action id="fastcreate" class="com.netease.steam.fastcreate.FastCreate" text="fast create" description="快速生成">
+            <add-to-group group-id="GenerateGroup" anchor="first"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt J" second-keystroke="ctrl alt J"/>
+        </action>
+    </actions>
+
+</idea-plugin>
