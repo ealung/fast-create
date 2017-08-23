@@ -52,7 +52,7 @@ public class FastCreate extends AnAction {
         fastParam.put("package", packagePath);
         fastParam.put("user", System.getProperty("user.name"));
         fastParam.put("modelName", psiClass.getName());
-        fastParam.put("fileds", getAttribute(psiClass));
+        fastParam.put("fields", getAttribute(psiClass));
         VirtualFile data = anActionEvent.getData(PlatformDataKeys.VIRTUAL_FILE);
         String path = data.getPath();
         path = path.substring(0, path.indexOf(psiClass.getName()) - 1);
