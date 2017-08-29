@@ -17,7 +17,7 @@ public class ${modelName}ManagerConvertUtils{
      */
     public static ${modelName}DTO convertToDto(${modelName}BO ${modelName?uncap_first}Bo){
         ${modelName}DTO ${modelName?uncap_first}Dto=new ${modelName}DTO();
-        <#list fileds as attr>
+        <#list fields as attr>
         ${modelName?uncap_first}Dto.set${attr.name?cap_first}(${modelName?uncap_first}Bo.get${attr.name?cap_first}());
         </#list>
         return ${modelName?uncap_first}Dto;
@@ -29,7 +29,7 @@ public class ${modelName}ManagerConvertUtils{
      */
     public static ${modelName}BO convertToBo(${modelName}DTO ${modelName?uncap_first}Dto){
         ${modelName}BO ${modelName?uncap_first}Bo=new ${modelName}BO();
-        <#list fileds as attr>
+        <#list fields as attr>
         ${modelName?uncap_first}Bo.set${attr.name?cap_first}(${modelName?uncap_first}Dto.get${attr.name?cap_first}());
         </#list>
         return ${modelName?uncap_first}Bo;

@@ -138,19 +138,21 @@ public class FastCreate extends AnAction {
      * @return
      */
     private String getType(PsiField psiField) {
-        String text = null;
-        try {
-            text = psiField.getText();
-            if (text.contains("serialVersionUID")) {
-                return null;
-            }
-            text = text.substring(text.lastIndexOf("\n") + 1, text.length());
-            String javaKey = "private";
-            text = text.substring(text.indexOf(javaKey) + javaKey.length(), text.indexOf(psiField.getName()));
-        } catch (Exception e) {
-            return text;
-        }
-        return text.trim();
+        return psiField.getType().getPresentableText();
+//        String text = null;
+//        try {
+//            text = psiField.getText();
+//            if (text.contains("serialVersionUID")) {
+//                return null;
+//            }
+//
+//            text = text.substring(text.lastIndexOf("\n") + 1, text.length());
+//            String javaKey = "private";
+//            text = text.substring(text.indexOf(javaKey) + javaKey.length(), text.indexOf(psiField.getName()));
+//        } catch (Exception e) {
+//            return text;
+//        }
+//        return text.trim();
     }
 
     private PsiClass getPsiMethodFromContext(AnActionEvent e) {

@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 public class ${modelName}BO implements Serializable {
 
-<#list fileds as attr>
+<#list fields as attr>
     private ${attr.type} ${attr.name};
 </#list>
 

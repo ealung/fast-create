@@ -36,7 +36,7 @@
         <!-- Add your actions here -->
         <action id="fastcreate" class="com.netease.steam.fastcreate.FastCreate" text="fast create" description="快速生成">
             <add-to-group group-id="GenerateGroup" anchor="first"/>
-            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt J" second-keystroke="ctrl alt J"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt J"/>
         </action>
     </actions>
 

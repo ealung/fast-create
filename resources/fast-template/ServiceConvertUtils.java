@@ -17,7 +17,7 @@ public class ${modelName}ServiceConvertUtils{
      */
     public static ${modelName} convertToMeta(${modelName}DTO ${modelName?uncap_first}Dto){
         ${modelName} ${modelName?uncap_first}=new ${modelName}();
-        <#list fileds as attr>
+        <#list fields as attr>
         ${modelName?uncap_first}.set${attr.name?cap_first}(${modelName?uncap_first}Dto.get${attr.name?cap_first}());
         </#list>
         return ${modelName?uncap_first};
@@ -29,7 +29,7 @@ public class ${modelName}ServiceConvertUtils{
      */
     public static ${modelName}DTO convertToDto(${modelName} ${modelName?uncap_first}){
         ${modelName}DTO ${modelName?uncap_first}Dto=new ${modelName}DTO();
-        <#list fileds as attr>
+        <#list fields as attr>
         ${modelName?uncap_first}Dto.set${attr.name?cap_first}(${modelName?uncap_first}.get${attr.name?cap_first}());
         </#list>
         return ${modelName?uncap_first}Dto;

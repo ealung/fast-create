@@ -18,7 +18,7 @@ public class ${modelName}ControllerConvertUtils{
      */
     public static ${modelName}BO convertToBo(${modelName}VO ${modelName?uncap_first}Vo){
         ${modelName}BO ${modelName?uncap_first}Bo=new ${modelName}BO();
-        <#list fileds as attr>
+        <#list fields as attr>
         ${modelName?uncap_first}Bo.set${attr.name?cap_first}(${modelName?uncap_first}Vo.get${attr.name?cap_first}());
         </#list>
         return ${modelName?uncap_first}Bo;
@@ -30,7 +30,7 @@ public class ${modelName}ControllerConvertUtils{
      */
     public static ${modelName}VO convertToVo(${modelName}BO ${modelName?uncap_first}Bo){
         ${modelName}VO ${modelName?uncap_first}Vo=new ${modelName}VO();
-        <#list fileds as attr>
+        <#list fields as attr>
         ${modelName?uncap_first}Vo.set${attr.name?cap_first}(${modelName?uncap_first}Bo.get${attr.name?cap_first}());
         </#list>
         return ${modelName?uncap_first}Vo;

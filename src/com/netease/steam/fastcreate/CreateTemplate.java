@@ -30,7 +30,11 @@ public class CreateTemplate {
                 if (file1.isDirectory()) {
                     continue;
                 }
-                createJava(root, file, file1.getName());
+                try {
+                    createJava(root, file, file1.getName());
+                } catch (Exception e) {
+                    Messages.showMessageDialog("模板错误，请核查是否是合法的freeMark模板"+e.getMessage(), "非法的创建", Messages.getWarningIcon());
+                }
             }
         }
 

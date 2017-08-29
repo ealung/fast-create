@@ -6,11 +6,11 @@ import java.util.Date;
 * Created by ${user} on ${.now}.
 */
 public class ${modelName}DTO implements Serializable {
-<#list fileds as attr>
+<#list fields as attr>
     private ${attr.type} ${attr.name};
 </#list>
 
-<#list fileds as attr>
+<#list fields as attr>
     /**
      * set${attr.name?cap_first}
      */
