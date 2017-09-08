@@ -1,5 +1,5 @@
 ### 综述
- - 可知己下载fastcreate.zip到本地 安装到intellij plugins 使用即可
+ - 可直接下载fastcreate.zip到本地 安装到intellij plugins 使用即可
 ### 基本构成
     依赖freeMark模板引擎生成对应文件
 ### 使用说明
