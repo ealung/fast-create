@@ -31,7 +31,7 @@ import java.util.Map;
 
 /**
  * Created by zhangchanglu on 2017/7/11
- * email hzzhangchanglu@corp.netease.com
+ * email zclsoft@163.com
  */
 public class FastCreate extends AnAction {
     private CreateTemplate createJava = new CreateTemplate();

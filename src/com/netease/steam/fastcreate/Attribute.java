@@ -2,7 +2,7 @@ package com.netease.steam.fastcreate;
 
 /**
  * Created by zhangchanglu on 2017/7/11
- * email hzzhangchanglu@corp.netease.com
+ * email zclsoft@163.com
  */
 public class Attribute {
     private String name;
