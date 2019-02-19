@@ -10,7 +10,7 @@ import com.netease.edu.steam.common.page.ResultPagination;
 import com.netease.edu.steam.common.page.PageParam;
 /**
  * Created by zhangchanglu on 2017/6/16
- * email hzzhangchanglu@corp.netease.com
+ * email zclsoft@163.com
  */
 @Component
 public class ${modelName}Manager {

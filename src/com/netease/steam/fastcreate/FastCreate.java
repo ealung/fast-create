@@ -19,15 +19,9 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateExceptionHandler;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by zhangchanglu on 2017/7/11
@@ -48,15 +42,47 @@ public class FastCreate extends AnAction {
         FastParam fastParam = new FastParam();
         PsiClass psiClass = getPsiMethodFromContext(anActionEvent);
         String qualifiedName = psiClass.getQualifiedName();
-        String packagePath = qualifiedName.substring(0, qualifiedName.indexOf("." + psiClass.getName()));
+        String packagePath = "";
+        if (null != psiClass.getName() && null != qualifiedName && !psiClass.getName().equals(qualifiedName)) {
+            packagePath = qualifiedName.substring(0, qualifiedName.indexOf("." + psiClass.getName()));
+        }
         fastParam.put("package", packagePath);
         fastParam.put("user", System.getProperty("user.name"));
         fastParam.put("modelName", psiClass.getName());
         fastParam.put("fields", getAttribute(psiClass));
+        fastParam.putAll(getExtendFatParam(anActionEvent.getProject()));
         VirtualFile data = anActionEvent.getData(PlatformDataKeys.VIRTUAL_FILE);
         String path = data.getPath();
         path = path.substring(0, path.indexOf(psiClass.getName()) - 1);
         fastParam.put("path", path);
+        return fastParam;
+    }
+
+    private FastParam getExtendFatParam(Project project) {
+        FastParam fastParam = new FastParam();
+        if (null == project || null == project.getBasePath()) {
+            return fastParam;
+        }
+        File file;
+        file = new File(project.getBasePath());
+        file = searchTemplate(file);
+        for (File file1 : file.listFiles()) {
+            String fileName = file1.getName();
+            String suffix = fileName.substring(fileName.lastIndexOf(".") + 1);
+            try {
+                if (suffix.equals("properties")) {
+                    Properties properties = new Properties();
+                    properties.load(new FileReader(file1));
+                    Enumeration en = properties.propertyNames();
+                    while (en.hasMoreElements()) {
+                        String name = en.nextElement().toString();
+                        fastParam.put(name, properties.get(name));
+                    }
+                }
+            } catch (IOException e) {
+                return fastParam;
+            }
+        }
         return fastParam;
     }
 

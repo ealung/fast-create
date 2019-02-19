@@ -12,7 +12,7 @@ import javax.annotation.Resource;
 import com.netease.edu.steam.common.page.ResultPagination;
 /**
  * Created by zhangchanglu on 2017/6/16
- * email hzzhangchanglu@corp.netease.com
+ * email zclsoft@163.com
  */
 @RestController
 @RequestMapping("/${modelName?uncap_first}")

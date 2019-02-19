@@ -30,10 +30,16 @@ public class CreateTemplate {
                 if (file1.isDirectory()) {
                     continue;
                 }
+                String fileName = file1.getName();
+                String suffix = fileName.substring(fileName.lastIndexOf(".") + 1);
+                //忽略properties文件
+                if (suffix.equals("properties")) {
+                    continue;
+                }
                 try {
                     createJava(root, file, file1.getName());
                 } catch (Exception e) {
-                    Messages.showMessageDialog("模板错误，请核查是否是合法的freeMark模板"+e.getMessage(), "非法的创建", Messages.getWarningIcon());
+                    Messages.showMessageDialog("模板错误，请核查是否是合法的freeMark模板" + e.getMessage(), "非法的创建", Messages.getWarningIcon());
                 }
             }
         }
