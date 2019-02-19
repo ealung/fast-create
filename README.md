@@ -20,3 +20,8 @@
     - name 字段名称
     - type 字段类型
 - className 当前生成模板的类名称
+### 支持自定义模板变量
+- 再fast-template文件夹下创建.properties结尾的配置文件
+    - 配置相关name=value
+    - 例如 url=/api
+    - 可在模板中直接使用${url}
