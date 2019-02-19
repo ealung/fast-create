@@ -49,6 +49,7 @@ public class FastCreate extends AnAction {
         fastParam.put("package", packagePath);
         fastParam.put("user", System.getProperty("user.name"));
         fastParam.put("modelName", psiClass.getName());
+        fastParam.put("className", psiClass.getName());
         fastParam.put("fields", getAttribute(psiClass));
         fastParam.putAll(getExtendFatParam(anActionEvent.getProject()));
         VirtualFile data = anActionEvent.getData(PlatformDataKeys.VIRTUAL_FILE);
