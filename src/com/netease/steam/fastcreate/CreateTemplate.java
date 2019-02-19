@@ -72,7 +72,7 @@ public class CreateTemplate {
             String path = root.get("path") + File.separator;
             if (null != createName) {
                 path += createName + ".java";
-                root.put("className", createName);
+                root.put("classFileName", createName);
             }
             daoImplTemplate.process(root, new OutputStreamWriter(new FileOutputStream(new File(path)), "UTF-8"));
         }

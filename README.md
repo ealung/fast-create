@@ -16,10 +16,11 @@
 - package 包路径，当前类所在包路径
 - user 当前系统用户名称
 - modelName 当前类名称
+- className 当前类名称
 - fields 当前类字段集合
     - name 字段名称
     - type 字段类型
-- className 当前生成模板的类名称
+- classFileName 当前生成模板的类名称
 ### 支持自定义模板变量
 - 再fast-template文件夹下创建.properties结尾的配置文件
     - 配置相关name=value
