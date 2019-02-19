@@ -51,7 +51,7 @@ public class FastCreate extends AnAction {
         fastParam.put("modelName", psiClass.getName());
         fastParam.put("className", psiClass.getName());
         fastParam.put("fields", getAttribute(psiClass));
-        fastParam.putAll(getExtendFatParam(anActionEvent.getProject()));
+        loadExtendFatParam(anActionEvent.getProject(), fastParam);
         VirtualFile data = anActionEvent.getData(PlatformDataKeys.VIRTUAL_FILE);
         String path = data.getPath();
         path = path.substring(0, path.indexOf(psiClass.getName()) - 1);
@@ -59,10 +59,9 @@ public class FastCreate extends AnAction {
         return fastParam;
     }
 
-    private FastParam getExtendFatParam(Project project) {
-        FastParam fastParam = new FastParam();
+    private void loadExtendFatParam(Project project, FastParam fastParam) {
         if (null == project || null == project.getBasePath()) {
-            return fastParam;
+            return;
         }
         File file;
         file = new File(project.getBasePath());
@@ -77,14 +76,22 @@ public class FastCreate extends AnAction {
                     Enumeration en = properties.propertyNames();
                     while (en.hasMoreElements()) {
                         String name = en.nextElement().toString();
-                        fastParam.put(name, properties.get(name));
+                        String value = properties.get(name).toString();
+                        //如果值为el表达式，从集合中获取对应值
+                        if (value.contains("$")) {
+                            String elKey = value.substring(2, value.lastIndexOf("}"));
+                            value = fastParam.get(elKey).toString();
+                            if (null == value) {
+                                value = elKey;
+                            }
+                        }
+                        fastParam.put(name, value);
                     }
                 }
             } catch (IOException e) {
-                return fastParam;
+                return;
             }
         }
-        return fastParam;
     }
 
     private void createForTemplate(Project project, PsiClass psiClass, FastParam fastParam) {
