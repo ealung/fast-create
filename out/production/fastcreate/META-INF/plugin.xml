@@ -2,7 +2,7 @@
     <id>com.netease.steam.fastcreate</id>
     <name>fast create</name>
     <version>1.0</version>
-    <vendor email="hzzhangchanglu@corp.netease.com" url="http://www.163.com">netease</vendor>
+    <vendor email="zclsoft@163.com" url="">netease</vendor>
 
     <description><![CDATA[
      已经支持内置模板变量 \r\n

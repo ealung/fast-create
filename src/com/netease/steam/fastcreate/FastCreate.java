@@ -80,9 +80,11 @@ public class FastCreate extends AnAction {
                         //如果值为el表达式，从集合中获取对应值
                         if (value.contains("$")) {
                             String elKey = value.substring(2, value.lastIndexOf("}"));
-                            value = fastParam.get(elKey).toString();
-                            if (null == value) {
+                            Object elValue = fastParam.get(elKey);
+                            if (null == elValue) {
                                 value = elKey;
+                            }else{
+                                value = elValue.toString();
                             }
                         }
                         fastParam.put(name, value);
